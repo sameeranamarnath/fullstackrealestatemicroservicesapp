@@ -1,7 +1,7 @@
 
-An event-driven real estate web application with a house collection. With this application, house checkers and clients can browse the houses in the collection to see if they like any of them.
+An event-driven real estate web application with a house collection. With this application, users  and prospective buyers can browse the properties in the collection to see if they like any of them.
 
-Frontend stack React TypeScript, HTML, CSS, and Bootstrap. 
+Frontend stack= React TypeScript, HTML, CSS, and Bootstrap. 
 Backend stack
 a) config ( django,mysql,docker)
 b) houses ( django,mysql,docker)
