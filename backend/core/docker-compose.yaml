@@ -1,0 +1,38 @@
+version: "3"
+services:
+  backend:
+    image: python_django_flask:latest
+    command: "python3 core.py"
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/backendservice
+    depends_on:
+      db:
+        condition: service_healthy
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: "python3 consumer.py"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: core
+      MYSQL_USER: microservice
+      MYSQL_PASSWORD: microservice
+      MYSQL_ROOT_PASSWORD: microservice
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - 3309:3306
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+
+volumes:
+  dbdata:
